@@ -3,7 +3,7 @@ import useAuth from "../../Hooks/useAuth";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import DarkMode from "./DarkMode";
-import logo from "../../assets/logo/food-logo.png";
+import logo from "../../assets/logo/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,13 +21,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white dark:bg-gray-900 dark:text-white duration-200 lg:sticky lg:top-0 lg:z-50">
+    <nav className="bg-white border-b dark:border-black shadow-sm dark:bg-gray-900 dark:text-white duration-200 lg:sticky lg:top-0 lg:z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div>
-            <a className="font-bold text-2xl sm:text-3xl flex gap-2">
+            <a className="font-bold text-2xl sm:text-3xl flex gap-4">
               <img src={logo} alt="Logo" className="md:w-10 w-7" />
-              Foodie
+              Techno Zen
             </a>
           </div>
           <div className="-mr-2 flex lg:hidden">
@@ -128,12 +128,12 @@ const Navbar = () => {
             ) : (
               <div className="ml-4 flex items-center md:ml-6">
                 <Link to="/login">
-                  <button className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 font-semibold italic text-white py-1 px-6 rounded-full flex items-center text-lg gap-3">
+                  <button className="bg-teal-500 hover:bg-teal-600 hover:scale-105 duration-200 font-semibold italic text-white py-1 px-6 rounded-full flex items-center text-lg gap-3">
                     Login
                   </button>
                 </Link>
                 <Link to="/sign-up">
-                  <button className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 font-semibold italic text-white py-1 px-5 rounded-full flex text-lg items-center mx-4 gap-3">
+                  <button className="bg-teal-500 hover:bg-teal-600 hover:scale-105 duration-200 font-semibold italic text-white py-1 px-5 rounded-full flex text-lg items-center mx-4 gap-3">
                     Sign up
                   </button>
                 </Link>
@@ -193,7 +193,7 @@ const Navbar = () => {
                 </div>
                 <button
                   onClick={handleSignOut}
-                  className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 font-semibold italic text-white py-1 px-6 rounded-full flex items-center text-lg"
+                  className="bg-teal-500 hover:bg-teal-600 hover:scale-105 duration-200 font-semibold italic text-white py-1 px-6 rounded-full flex items-center text-lg"
                 >
                   Log Out
                 </button>
@@ -201,12 +201,12 @@ const Navbar = () => {
             ) : (
               <>
                 <Link to="/login">
-                  <button className="block mt-1 md:w-1/2 w-full text-white font-semibold text-xl px-4 py-2 rounded-md italic bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200">
+                  <button className="block mt-1 md:w-1/2 w-full text-white font-semibold text-xl px-4 py-2 rounded-md italic bg-teal-500 hover:bg-teal-600 hover:scale-105 duration-200">
                     Login
                   </button>
                 </Link>
                 <Link to="/sign-up">
-                  <button className="block mt-1 md:w-1/2 text-white font-semibold text-xl w-full px-4 py-2 rounded-md italic bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200">
+                  <button className="block mt-1 md:w-1/2 text-white font-semibold text-xl w-full px-4 py-2 rounded-md italic bg-teal-500 hover:bg-teal-600 hover:scale-105 duration-200">
                     Sign up
                   </button>
                 </Link>

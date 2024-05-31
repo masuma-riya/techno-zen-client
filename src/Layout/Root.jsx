@@ -6,7 +6,7 @@ import Footer from "../Pages/Footer/Footer";
 
 const Root = () => {
   return (
-    <div className="font-raleway">
+    <div className="font-raleway dark:bg-black">
       <Navbar></Navbar>
       <Outlet></Outlet>
       <Footer></Footer>
