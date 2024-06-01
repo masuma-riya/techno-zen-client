@@ -34,8 +34,15 @@ const SocialLogin = () => {
     signInWithGithub()
       .then((result) => {
         console.log(result.user);
-        toast.success("Github Login Successful!");
-        navigate(from, { replace: true });
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+        };
+        axiosPublic.post("/users", userInfo).then((res) => {
+          console.log(res.data);
+          toast.success("Google Login Successful!");
+          navigate(from, { replace: true });
+        });
       })
       .catch((error) => {
         console.error(error);

@@ -92,7 +92,7 @@ const Login = () => {
                 </span>
               </a>
               {loginError && (
-                <p className="md:text-lg text-base font-bold text-center lg:pt-6 pt-4 lg:pb-2 text-red-600">
+                <p className="md:text-lg text-base font-bold text-center pt-2 pb-1 text-red-600">
                   {loginError}
                 </p>
               )}

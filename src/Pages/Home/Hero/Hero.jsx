@@ -14,13 +14,13 @@ const Hero = () => {
           <div className="container mx-auto px-8 lg:flex">
             <div className="text-center lg:text-left lg:w-1/2">
               <h1 className="text-4xl dark:text-white lg:text-5xl xl:text-6xl font-bold leading-none">
-                Main title of your landing page
+                Welcome <span className="text-sky-500">Techno </span> ZEN
               </h1>
-              <p className="text-xl dark:text-white lg:text-2xl mt-6 font-light">
+              <p className=" dark:text-white text-xl mt-6 font-normal italic">
                 Free landing page template to promote your business startup and
                 generate leads for the offered services
               </p>
-              <p className="mt-8 md:mt-12">
+              <p className="mt-8 md:mt-10">
                 <button
                   type="button"
                   className=" py-4 px-12 bg-teal-500 hover:bg-teal-600 rounded text-white"

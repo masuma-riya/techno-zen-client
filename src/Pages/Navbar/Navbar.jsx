@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import DarkMode from "./DarkMode";
 import logo from "../../assets/logo/logo.png";
+import useAdmin from "../../Hooks/useAdmin";
+import useModerator from "../../Hooks/useModerator";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isAdmin] = useAdmin();
+  const [isModerator] = useModerator();
   const { user, logOut } = useAuth();
 
   const navigate = useNavigate();
 
+  // handle logout
   const handleSignOut = () => {
     logOut()
       .then(() => {
@@ -19,6 +25,16 @@ const Navbar = () => {
       })
       .catch((error) => console.log(error));
   };
+
+  // handle userImage click dropdown
+  const handleProfileClick = () => {
+    setIsProfileOpen(!isProfileOpen);
+  };
+
+  // close auto dropdown showing after login/signup
+  useEffect(() => {
+    setIsProfileOpen(false);
+  }, [user]);
 
   return (
     <nav className="bg-white border-b dark:border-black shadow-sm dark:bg-gray-900 dark:text-white duration-200 lg:sticky lg:top-0 lg:z-50">
@@ -67,63 +83,82 @@ const Navbar = () => {
             </button>
           </div>
           <div className="hidden lg:block">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-10">
               <NavLink
                 to="/"
-                className="text-black dark:text-white hover:text-blue-600 px-3 py-2 rounded-md text-lg italic font-semibold"
+                className="text-black dark:text-white hover:text-blue-600 px-3 py-2 rounded-md text-xl italic font-semibold"
               >
                 Home
               </NavLink>
               <NavLink
-                to="/contact-us"
-                className="text-black dark:text-white hover:text-blue-600 px-3 py-2 rounded-md text-lg italic font-semibold"
+                to="/"
+                className="text-black dark:text-white hover:text-blue-600 px-3 py-2 rounded-md text-xl italic font-semibold"
               >
-                Contact Us
+                Products
               </NavLink>
+
               <NavLink
-                to="/dashboard"
-                className="text-black dark:text-white hover:text-blue-600 px-3 py-2 rounded-md text-lg italic font-semibold"
+                to="/"
+                className="text-black dark:text-white hover:text-blue-600 px-3 py-2 rounded-md text-xl italic font-semibold"
               >
-                Dashboard
-              </NavLink>
-              <NavLink
-                to="/our-menu"
-                className="text-black dark:text-white hover:text-blue-600 px-3 py-2 rounded-md text-lg italic font-semibold"
-              >
-                Our Menu
-              </NavLink>
-              <NavLink
-                to="/order-food/salads"
-                className="text-black dark:text-white hover:text-blue-600 px-3 py-2 rounded-md text-lg italic font-semibold"
-              >
-                Order Food
+                About Us
               </NavLink>
             </div>
           </div>
 
-          <div>
+          <div className="lg:hidden">
             <DarkMode></DarkMode>
           </div>
 
           <div className="hidden lg:block">
             {user ? (
-              <div className="flex gap-6 items-center">
-                <div className="relative">
-                  <img
-                    className="w-12 mt-4 mb-4 h-12 rounded-full border-blue-600 cursor-pointer"
-                    src={
-                      user?.photoURL || "https://i.ibb.co/FBZQVTZ/defalt.jpg"
-                    }
-                    alt=""
-                    title={user.displayName} // Add the title attribute here
-                  />
+              <div className="flex gap-6 items-center relative">
+                <img
+                  className="w-12 mt-4 mb-4 h-12 rounded-full border-blue-600 cursor-pointer"
+                  src={user?.photoURL || "https://i.ibb.co/FBZQVTZ/defalt.jpg"}
+                  alt=""
+                  onClick={handleProfileClick}
+                />
+                <div>
+                  <DarkMode></DarkMode>
                 </div>
-                <button
-                  onClick={handleSignOut}
-                  className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 font-semibold italic text-white py-1 px-6 rounded-full flex items-center text-lg"
-                >
-                  Log Out
-                </button>
+                {isProfileOpen && (
+                  <div className="absolute right-0 -mr-8 mt-48 w-32 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg py-1 z-20 dropdown-content">
+                    <div className="px-4 py-2 text-base font-semibold text-gray-900 dark:text-gray-100">
+                      {user.displayName}
+                    </div>
+                    {user && isAdmin && (
+                      <NavLink
+                        to="/dashboard/statistics"
+                        className="block px-4 py-2 text-base text-gray-700 dark:text-gray-300 font-semibold hover:bg-gray-100 dark:hover:bg-gray-600"
+                      >
+                        Dashboard
+                      </NavLink>
+                    )}
+                    {user && isModerator && !isAdmin && (
+                      <NavLink
+                        to="/dashboard/reviewProducts"
+                        className="block px-4 py-2 text-base text-gray-700 dark:text-gray-300 font-semibold hover:bg-gray-100 dark:hover:bg-gray-600"
+                      >
+                        Dashboard
+                      </NavLink>
+                    )}
+                    {user && !isAdmin && !isModerator && (
+                      <NavLink
+                        to="/dashboard/profile"
+                        className="block px-4 py-2 text-base text-gray-700 dark:text-gray-300 font-semibold hover:bg-gray-100 dark:hover:bg-gray-600"
+                      >
+                        Dashboard
+                      </NavLink>
+                    )}
+                    <button
+                      onClick={handleSignOut}
+                      className="bg-teal-500 hover:bg-teal-600 hover:scale-105 duration-200 font-semibold italic text-white py-1 px-3 rounded-md flex text-base items-center ml-4 mt-1 mb-2"
+                    >
+                      Log Out
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="ml-4 flex items-center md:ml-6">
@@ -137,6 +172,9 @@ const Navbar = () => {
                     Sign up
                   </button>
                 </Link>
+                <div>
+                  <DarkMode></DarkMode>
+                </div>
               </div>
             )}
           </div>
@@ -155,48 +193,57 @@ const Navbar = () => {
             Home
           </NavLink>
           <NavLink
-            to="/contact-us"
+            to="/"
             className="text-black dark:text-white text-lg md:text-xl italic font-semibold hover:text-blue-600 block px-3 py-2 rounded-md"
           >
-            Contact Us
+            Products
           </NavLink>
+
           <NavLink
-            to="/dashboard"
+            to="/"
             className="text-black dark:text-white text-lg md:text-xl italic font-semibold hover:text-blue-600 block px-3 py-2 rounded-md"
           >
-            Dashboard
+            About Us
           </NavLink>
-          <NavLink
-            to="/our-menu"
-            className="text-black dark:text-white text-lg md:text-xl italic font-semibold hover:text-blue-600 block px-3 py-2 rounded-md"
-          >
-            Our Menu
-          </NavLink>
-          <NavLink
-            to="/order-food/salads"
-            className="text-black dark:text-white text-lg md:text-xl italic font-semibold hover:text-blue-600 block px-3 py-2 rounded-md"
-          >
-            Order Food
-          </NavLink>
+
           <div className="mt-2">
             {user ? (
-              <div className="flex gap-6 items-center">
-                <div className="relative">
-                  <img
-                    className="w-12 mt-4 mb-4 h-12 rounded-full border-blue-600 cursor-pointer"
-                    src={
-                      user?.photoURL || "https://i.ibb.co/FBZQVTZ/defalt.jpg"
-                    }
-                    alt=""
-                    title={user.displayName} // Add the title attribute here
-                  />
-                </div>
-                <button
-                  onClick={handleSignOut}
-                  className="bg-teal-500 hover:bg-teal-600 hover:scale-105 duration-200 font-semibold italic text-white py-1 px-6 rounded-full flex items-center text-lg"
-                >
-                  Log Out
-                </button>
+              <div className="flex gap-6 items-center relative">
+                <img
+                  className="w-12 mt-2 ml-3 h-12 rounded-full border-blue-600 cursor-pointer"
+                  src={user?.photoURL || "https://i.ibb.co/FBZQVTZ/defalt.jpg"}
+                  alt=""
+                  onClick={handleProfileClick}
+                />
+                {isProfileOpen && (
+                  <div className="absolute md:left-20 left-36 md:mt-5 md:flex md:flex-row  pt-2 pb-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg pr-4">
+                    <div className="px-4 py-2 text-base font-semibold text-gray-900 dark:text-gray-100">
+                      {user.displayName}
+                    </div>
+                    {user && isAdmin && (
+                      <NavLink
+                        to="/dashboard/statistics"
+                        className="block px-4 py-2 text-base text-gray-700 dark:text-gray-300 font-semibold hover:bg-gray-100 dark:hover:bg-gray-600"
+                      >
+                        Dashboard
+                      </NavLink>
+                    )}
+                    {user && !isAdmin && (
+                      <NavLink
+                        to="/dashboard/profile"
+                        className="block px-4 py-2 text-base text-gray-700 dark:text-gray-300 font-semibold hover:bg-gray-100 dark:hover:bg-gray-600"
+                      >
+                        Dashboard
+                      </NavLink>
+                    )}
+                    <button
+                      onClick={handleSignOut}
+                      className="bg-teal-500 hover:bg-teal-600 hover:scale-105 duration-200 font-semibold italic text-white py-1 px-3 rounded-md flex text-base items-center ml-4 mt-1 mb-2"
+                    >
+                      Log Out
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
               <>
