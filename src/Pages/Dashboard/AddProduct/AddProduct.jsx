@@ -24,6 +24,7 @@ const AddProduct = () => {
       email: user?.email,
       photoURL: user?.photoURL,
       timestamp: timestamp,
+      upVote: 0,
     });
 
     if (res.data.insertedId) {
