@@ -17,11 +17,18 @@ const Products = () => {
             className="h-80 w-72 object-cover rounded-t-xl"
           />
           <div className="px-4 py-3 w-72">
-            <span className="mr-3 font-bold text-green-600 text-lg">
-              # {""}
-              {product.tags}
-            </span>
-            <p className="text-2xl mt-3 hover:underline font-bold text-black">
+            <div className="flex flex-wrap h-16 items-center">
+              {Array.isArray(product.tags) &&
+                product.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="mr-2 mb-2 bg-green-100 text-green-600 py-1 px-2 rounded-full text-sm font-semibold"
+                  >
+                    {tag}
+                  </span>
+                ))}
+            </div>
+            <p className="text-2xl mt-1 hover:underline font-bold text-black">
               {product.productName}
             </p>
             <p className="text-sm mt-4 h-32 font-semibold text-gray-500 italic">

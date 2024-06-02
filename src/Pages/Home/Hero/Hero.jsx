@@ -1,6 +1,7 @@
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import hero from "../../../assets/logo/heroo-removebg-preview.png";
 
 const Hero = () => {
   useEffect(() => {
@@ -30,6 +31,7 @@ const Hero = () => {
               </p>
             </div>
             <div className="lg:w-1/2">
+              {/* <img src={hero} alt="" /> */}
               <svg data-name="Layer 1" viewBox="0 0 1167.52 754.06">
                 <defs>
                   <linearGradient

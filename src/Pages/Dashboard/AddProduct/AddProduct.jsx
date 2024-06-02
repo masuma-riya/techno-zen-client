@@ -1,29 +1,34 @@
 import { useForm } from "react-hook-form";
-
+import { WithContext as ReactTags, SEPARATORS } from "react-tag-input";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
+import { useState } from "react";
 
 const AddProduct = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const [tags, setTags] = useState([]);
   const onSubmit = async (data) => {
+    const timestamp = new Date().toISOString();
     console.log(data);
     const res = await axiosSecure.post("/products", {
       productName: data.productName,
       productImage: data.productImage,
       description: data.description,
-      tags: data.tags,
+      tags: tags.map((tag) => tag.text),
       link: data.link,
       username: user?.displayName,
       email: user?.email,
       photoURL: user?.photoURL,
+      timestamp: timestamp,
     });
 
     if (res.data.insertedId) {
       reset();
+      setTags([]);
       Swal.fire({
         title: "Great!",
         text: `Your product (${data.productName}) is added`,
@@ -31,6 +36,30 @@ const AddProduct = () => {
       });
     }
     console.log(res.data);
+  };
+
+  // Tags handlers
+  const handleDelete = (index) => {
+    setTags(tags.filter((_, i) => i !== index));
+  };
+
+  const handleAddition = (tag) => {
+    setTags([...tags, tag]);
+  };
+
+  const handleDrag = (tag, currPos, newPos) => {
+    const newTags = tags.slice();
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+    setTags(newTags);
+  };
+
+  const handleTagClick = (index) => {
+    console.log("The tag at index " + index + " was clicked");
+  };
+
+  const onClearAll = () => {
+    setTags([]);
   };
   return (
     <div className="container mx-auto p4-10">
@@ -94,12 +123,22 @@ const AddProduct = () => {
                 >
                   Tags
                 </label>
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="tags"
-                  type="text"
-                  placeholder="Product Tags"
-                  {...register("tags", { required: true })}
+
+                <ReactTags
+                  tags={tags}
+                  suggestions={[]}
+                  separators={[SEPARATORS.SPACE, SEPARATORS.COMMA]}
+                  handleDelete={handleDelete}
+                  handleAddition={handleAddition}
+                  handleDrag={handleDrag}
+                  handleTagClick={handleTagClick}
+                  onClearAll={onClearAll}
+                  maxTags={6}
+                  placeholder="Type a tag and hit spacebar"
+                  classNames={{
+                    tagInputField:
+                      "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                  }}
                 />
               </div>
               <div className="mb-6">
