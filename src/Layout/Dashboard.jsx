@@ -21,7 +21,7 @@ const Dashboard = () => {
   const { user } = useAuth();
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-gray-100">
       {/* sidebar */}
       <div className="md:flex md:flex-col md:w-64 bg-gray-800">
         <div className="flex items-center justify-center h-16 bg-gray-900">
@@ -121,7 +121,7 @@ const Dashboard = () => {
               Home
             </NavLink>
             <NavLink
-              to="/"
+              to="/products"
               className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"
             >
               <RiProductHuntLine className="mr-2"></RiProductHuntLine>
@@ -138,7 +138,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div>
+      <div className="w-full">
         <Outlet></Outlet>
       </div>
     </div>

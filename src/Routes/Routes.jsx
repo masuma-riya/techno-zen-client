@@ -16,6 +16,7 @@ import AdminRoute from "./AdminRoute/AdminRoute";
 import ReviewProducts from "../Pages/Dashboard/ReviewProducts/ReviewProducts";
 import ReportedCon from "../Pages/Dashboard/ReportedCon/ReportedCon";
 import ModeratorRoute from "./ModeratorRoute/ModeratorRoute";
+import Products from "../Pages/Products/Products";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
+      },
+      {
+        path: "/products",
+        element: <Products></Products>,
       },
       {
         path: "/update-user",

@@ -91,7 +91,7 @@ const Navbar = () => {
                 Home
               </NavLink>
               <NavLink
-                to="/"
+                to="/products"
                 className="text-black dark:text-white hover:text-blue-600 px-3 py-2 rounded-md text-xl italic font-semibold"
               >
                 Products
@@ -193,7 +193,7 @@ const Navbar = () => {
             Home
           </NavLink>
           <NavLink
-            to="/"
+            to="/products"
             className="text-black dark:text-white text-lg md:text-xl italic font-semibold hover:text-blue-600 block px-3 py-2 rounded-md"
           >
             Products
@@ -228,7 +228,15 @@ const Navbar = () => {
                         Dashboard
                       </NavLink>
                     )}
-                    {user && !isAdmin && (
+                    {user && isModerator && !isAdmin && (
+                      <NavLink
+                        to="/dashboard/reviewProducts"
+                        className="block px-4 py-2 text-base text-gray-700 dark:text-gray-300 font-semibold hover:bg-gray-100 dark:hover:bg-gray-600"
+                      >
+                        Dashboard
+                      </NavLink>
+                    )}
+                    {user && !isAdmin && !isModerator && (
                       <NavLink
                         to="/dashboard/profile"
                         className="block px-4 py-2 text-base text-gray-700 dark:text-gray-300 font-semibold hover:bg-gray-100 dark:hover:bg-gray-600"
