@@ -1,4 +1,3 @@
-import useProducts from "../../Hooks/useProducts";
 import { BiDownvote } from "react-icons/bi";
 import { BiUpvote } from "react-icons/bi";
 import useAuth from "../../Hooks/useAuth";
@@ -6,9 +5,10 @@ import { useMutation } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import useAccPro from "../../Hooks/useAccPro";
 
 const Products = () => {
-  const [products, , refetch] = useProducts();
+  const [acceptedProducts, , refetch] = useAccPro();
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -17,23 +17,24 @@ const Products = () => {
     mutationFn: async ({ id, userEmail }) =>
       await axiosPublic.put(`/voteCount/${id}`, { userEmail }),
   });
-  const handleVoteCount = async (id) => {
+  const handleVoteCount = async (product) => {
     if (!user) {
-      navigate("/login"); // Redirect to login page
+      navigate("/login");
       return;
     }
 
     try {
-      await voteIncrement({ id, userEmail: user.email });
+      await voteIncrement({ id: product._id, userEmail: user.email });
       refetch();
       toast.success("Vote done");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Error voting for product");
+      // toast.error(error.response?.data?.message || "Error voting for product");
+      console.log(error || "Error voting for product");
     }
   };
   return (
     <div className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
-      {products.map((product) => (
+      {acceptedProducts.map((product) => (
         <div
           key={product._id}
           className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl"
@@ -61,22 +62,27 @@ const Products = () => {
             <p className="text-sm mt-4 h-32 font-semibold text-gray-500 italic">
               {product.description}
             </p>
+            <button className="px-4 mt-2 bg-green-500 italic text-base text-white font-semibold rounded-xl py-1">
+              {product.ProductStatus}
+            </button>
 
             <div className="flex gap-2 mt-4 mb-3 justify-end">
               <button
-                onClick={() => handleVoteCount(product._id)}
-                disabled={
-                  user?.email === product.email ||
-                  product.voters?.includes(user?.email)
-                }
+                onClick={() => {
+                  if (product.voters?.includes(user.email)) {
+                    toast.error("You have already voted product");
+                  } else {
+                    handleVoteCount(product);
+                  }
+                }}
+                disabled={user?.email === product.email}
                 className={`py-1 px-4 hover:text-green-600 hover:scale-105 hover:shadow text-center border rounded-md border-gray-300 h-8 text-sm flex items-center gap-1 lg:gap-2 ${
-                  user?.email === product.email ||
-                  product.voters?.includes(user?.email)
-                    ? "cursor-not-allowed opacity-50"
+                  user?.email === product.email
+                    ? "cursor-not-allowed opacity-60 hover:text-black"
                     : ""
                 }`}
               >
-                <BiUpvote className="hover:text-green-600 text-xl"></BiUpvote>
+                <BiUpvote className="text-xl"></BiUpvote>
                 <span className="text-lg">{product?.upVote || 0}</span>
               </button>
               <button className="py-1 px-4 hover:text-red-600 hover:scale-105 hover:shadow text-center border border-gray-300 rounded-md h-8 text-sm flex items-center gap-1 lg:gap-2">

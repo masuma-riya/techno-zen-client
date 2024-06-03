@@ -14,11 +14,29 @@ import "../Layout/Dashboard.css";
 import useAdmin from "../Hooks/useAdmin";
 import useModerator from "../Hooks/useModerator";
 import useAuth from "../Hooks/useAuth";
+import { useEffect, useState } from "react";
+import Loader from "../Layout/Loader";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [isModerator] = useModerator();
   const { user } = useAuth();
+
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoaded(true);
+    }, 1000);
+  }, []);
+
+  if (!loaded) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Loader></Loader>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -75,7 +93,7 @@ const Dashboard = () => {
                   className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700"
                 >
                   <GoCodeReview className="mr-2"></GoCodeReview>
-                  Product Review Queue
+                  Review Products
                 </NavLink>
                 <NavLink
                   to="/dashboard/reportedContents"
