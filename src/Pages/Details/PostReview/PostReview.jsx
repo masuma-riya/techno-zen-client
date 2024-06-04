@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 
-const PostReview = () => {
+const PostReview = ({ productId }) => {
   const { user } = useAuth();
   const { displayName, photoURL } = user;
   const axiosSecure = useAxiosSecure();
@@ -28,6 +28,7 @@ const PostReview = () => {
       photoURL,
       feedback,
       rating,
+      productId,
     };
 
     try {
