@@ -87,7 +87,7 @@ const Users = () => {
                   <div className="dropdown dropdown-click">
                     <button
                       tabIndex={0}
-                      className="btn btn-sm rounded-md bg-[#D1A054]"
+                      className="btn btn-sm rounded-md bg-slate-600 hover:bg-slate-500"
                     >
                       <FaUsers className="text-white text-2xl"></FaUsers>
                     </button>

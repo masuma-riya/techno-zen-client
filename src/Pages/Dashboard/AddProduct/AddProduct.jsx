@@ -26,6 +26,7 @@ const AddProduct = () => {
       timestamp: timestamp,
       upVote: 0,
       ProductStatus: data.productStatus,
+      ProductType: data.productType,
     });
 
     if (res.data.insertedId) {
@@ -158,7 +159,7 @@ const AddProduct = () => {
                   {...register("link", { required: true })}
                 />
               </div>
-              <div className="mb-6">
+              <div className="mb-6 hidden">
                 <label
                   className="block text-gray-800 font-bold mb-2"
                   htmlFor="productStatus"
@@ -170,6 +171,27 @@ const AddProduct = () => {
                   id="productStatus"
                   type="text"
                   {...register("productStatus", { value: "Pending" })}
+                  style={{
+                    color: "red",
+                    fontWeight: "500",
+                    fontSize: "1.1rem",
+                    fontStyle: "italic",
+                  }}
+                  readOnly
+                />
+              </div>
+              <div className="mb-6 hidden">
+                <label
+                  className="block text-gray-800 font-bold mb-2"
+                  htmlFor="productType"
+                >
+                  Product Type
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="productType"
+                  type="text"
+                  {...register("productType", { value: "Normal" })}
                   style={{
                     color: "red",
                     fontWeight: "500",

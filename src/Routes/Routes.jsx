@@ -17,6 +17,8 @@ import ReviewProducts from "../Pages/Dashboard/ReviewProducts/ReviewProducts";
 import ReportedCon from "../Pages/Dashboard/ReportedCon/ReportedCon";
 import ModeratorRoute from "./ModeratorRoute/ModeratorRoute";
 import Products from "../Pages/Products/Products";
+import Details from "../Pages/Details/Details";
+import PrivateRoute2 from "./PrivateRoute2/PrivateRoute2";
 
 export const router = createBrowserRouter([
   {
@@ -40,11 +42,20 @@ export const router = createBrowserRouter([
         element: <Products></Products>,
       },
       {
+        path: "/details/:id",
+        element: (
+          <PrivateRoute2>
+            <Details></Details>
+          </PrivateRoute2>
+        ),
+      },
+      {
         path: "/update-user",
         element: (
-          <PrivateRoute>
-            <UpdateUser></UpdateUser>{" "}
-          </PrivateRoute>
+          <PrivateRoute2>
+            {" "}
+            <UpdateUser></UpdateUser>
+          </PrivateRoute2>
         ),
       },
     ],
@@ -71,7 +82,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "products",
+        path: "myProducts",
         element: (
           <PrivateRoute>
             <MyProducts></MyProducts>

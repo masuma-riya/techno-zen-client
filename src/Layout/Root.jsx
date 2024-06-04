@@ -5,6 +5,7 @@ import Navbar from "../Pages/Navbar/Navbar";
 import Footer from "../Pages/Footer/Footer";
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
+import { Toaster } from "react-hot-toast";
 
 const Root = () => {
   const [loaded, setLoaded] = useState(false);
@@ -28,7 +29,8 @@ const Root = () => {
       <Navbar></Navbar>
       <Outlet></Outlet>
       <Footer></Footer>
-      <ToastContainer position="top-right" autoClose={2000} />
+      <ToastContainer position="top-right" autoClose={1000} />
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 };

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useProducts from "../../../Hooks/useProducts";
+import toast from "react-hot-toast";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { NavLink } from "react-router-dom";
 
 const ReviewProducts = () => {
   const [products, , refetch] = useProducts();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   // getitem from localStorage
   const initialDisabledButtons =
@@ -18,9 +20,10 @@ const ReviewProducts = () => {
     localStorage.setItem("disabledButtons", JSON.stringify(disabledButtons));
   }, [disabledButtons]);
 
+  // Accepted product
   const handleAcceptProduct = async (productId) => {
     try {
-      await axiosPublic.put(`/acceptedProduct/${productId}`, {
+      await axiosSecure.put(`/acceptedProduct/${productId}`, {
         status: "Accepted",
       });
       setDisabledButtons((prev) => ({ ...prev, [productId]: true }));
@@ -30,9 +33,11 @@ const ReviewProducts = () => {
       console.error("Error accepting product:", error);
     }
   };
+
+  // Rejected product
   const handleRejectProduct = async (productId) => {
     try {
-      await axiosPublic.put(`/rejectedProduct/${productId}`, {
+      await axiosSecure.put(`/rejectedProduct/${productId}`, {
         status: "Rejected",
       });
       setDisabledButtons((prev) => ({ ...prev, [productId]: true }));
@@ -40,6 +45,20 @@ const ReviewProducts = () => {
       console.log("Product rejected successfully");
     } catch (error) {
       console.error("Error rejecting product:", error);
+    }
+  };
+
+  // Featured products
+  const handleFeaturedProduct = async (productId) => {
+    try {
+      await axiosSecure.put(`/productType/${productId}`, {
+        status: "Featured",
+      });
+      refetch();
+      console.log("Product Type change successfully");
+      toast.success("Successfully mark as Featured");
+    } catch (error) {
+      console.error("Error Type updating product:", error);
     }
   };
 
@@ -138,7 +157,7 @@ const ReviewProducts = () => {
                       disabled={disabledButtons[product._id]}
                       className={`mx-4 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline ${
                         disabledButtons[product._id]
-                          ? "cursor-not-allowed bg-blue-300 hover:bg-blue-300"
+                          ? "cursor-not-allowed bg-blue-100 hover:bg-blue-100"
                           : ""
                       }`}
                     >
@@ -159,18 +178,32 @@ const ReviewProducts = () => {
                     </button>
                   </td>
                   <td className="p-4 border-b border-blue-gray-50">
-                    <button className="relative inline-flex items-center justify-center p-0.5 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900">
-                      <span className="relative px-4 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                        Make Feature
+                    <button
+                      onClick={() => handleFeaturedProduct(product._id)}
+                      className="relative inline-flex items-center justify-center p-0.5 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900"
+                    >
+                      <span
+                        className={`relative px-4 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md ${
+                          product.ProductType === "Featured"
+                            ? "cursor-not-allowed"
+                            : "group-hover:bg-opacity-0"
+                        }`}
+                      >
+                        {product.ProductType === "Featured"
+                          ? "Featured"
+                          : "Make Feature"}
                       </span>
                     </button>
                   </td>
                   <td className="p-4 border-b border-blue-gray-50">
-                    <button className="relative inline-flex items-center justify-center p-0.5 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white">
-                      <span className="relative px-4 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                        View Details
-                      </span>
-                    </button>
+                    <NavLink to={`/details/${product._id}`}>
+                      {" "}
+                      <button className="relative inline-flex items-center justify-center p-0.5 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white">
+                        <span className="relative px-4 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                          View Details
+                        </span>
+                      </button>
+                    </NavLink>
                   </td>
                 </tr>
               ))}

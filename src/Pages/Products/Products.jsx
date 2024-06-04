@@ -2,20 +2,20 @@ import { BiDownvote } from "react-icons/bi";
 import { BiUpvote } from "react-icons/bi";
 import useAuth from "../../Hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import useAccPro from "../../Hooks/useAccPro";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const Products = () => {
   const [acceptedProducts, , refetch] = useAccPro();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const navigate = useNavigate();
 
   const { mutateAsync: voteIncrement } = useMutation({
     mutationFn: async ({ id, userEmail }) =>
-      await axiosPublic.put(`/voteCount/${id}`, { userEmail }),
+      await axiosSecure.put(`/voteCount/${id}`, { userEmail }),
   });
   const handleVoteCount = async (product) => {
     if (!user) {
@@ -26,7 +26,9 @@ const Products = () => {
     try {
       await voteIncrement({ id: product._id, userEmail: user.email });
       refetch();
-      toast.success("Vote done");
+      toast("Woww! Vote done", {
+        icon: "👏",
+      });
     } catch (error) {
       // toast.error(error.response?.data?.message || "Error voting for product");
       console.log(error || "Error voting for product");
@@ -69,15 +71,15 @@ const Products = () => {
             <div className="flex gap-2 mt-4 mb-3 justify-end">
               <button
                 onClick={() => {
-                  if (product.voters?.includes(user.email)) {
-                    toast.error("You have already voted product");
+                  if (product.voters?.includes(user?.email)) {
+                    toast.error("You've already voted this product");
                   } else {
                     handleVoteCount(product);
                   }
                 }}
-                disabled={user?.email === product.email}
+                disabled={user?.email === product?.email}
                 className={`py-1 px-4 hover:text-green-600 hover:scale-105 hover:shadow text-center border rounded-md border-gray-300 h-8 text-sm flex items-center gap-1 lg:gap-2 ${
-                  user?.email === product.email
+                  user?.email === product?.email
                     ? "cursor-not-allowed opacity-60 hover:text-black"
                     : ""
                 }`}
