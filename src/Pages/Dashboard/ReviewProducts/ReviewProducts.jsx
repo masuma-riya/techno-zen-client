@@ -155,37 +155,41 @@ const ReviewProducts = () => {
                     <button
                       onClick={() => handleAcceptProduct(product._id)}
                       disabled={disabledButtons[product._id]}
-                      className={`mx-4 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline ${
+                      className={`mx-4 text-sm ${
                         disabledButtons[product._id]
-                          ? "cursor-not-allowed bg-blue-100 hover:bg-blue-100"
-                          : ""
-                      }`}
+                          ? "bg-blue-400 hover:bg-blue-400 cursor-not-allowed"
+                          : "bg-blue-500 hover:bg-blue-700"
+                      } text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline`}
                     >
-                      Accept
+                      {product.ProductStatus === "Accepted"
+                        ? "Accepted"
+                        : "Accept"}
                     </button>
                   </td>
                   <td className="p-4 border-b border-blue-gray-50">
                     <button
                       onClick={() => handleRejectProduct(product._id)}
                       disabled={disabledButtons[product._id]}
-                      className={`text-[15px] bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline ${
+                      className={`text-[15px] ${
                         disabledButtons[product._id]
-                          ? "cursor-not-allowed bg-red-200 hover:bg-red-200"
-                          : ""
-                      }`}
+                          ? "bg-red-300 hover:bg-red-300 cursor-not-allowed"
+                          : "bg-red-500 hover:bg-red-700"
+                      } text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline`}
                     >
-                      Reject
+                      {product.ProductStatus === "Rejected"
+                        ? "Rejected"
+                        : "Reject"}
                     </button>
                   </td>
                   <td className="p-4 border-b border-blue-gray-50">
                     <button
                       onClick={() => handleFeaturedProduct(product._id)}
-                      className="relative inline-flex items-center justify-center p-0.5 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900"
+                      className="relative inline-flex items-center justify-center p-0.5 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 dark:text-white dark:hover:text-gray-900"
                     >
                       <span
                         className={`relative px-4 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md ${
                           product.ProductType === "Featured"
-                            ? "cursor-not-allowed"
+                            ? "cursor-not-allowed bg-opacity-0"
                             : "group-hover:bg-opacity-0"
                         }`}
                       >

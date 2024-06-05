@@ -5,15 +5,29 @@ import Loader from "../../../Layout/Loader";
 import { BiDownvote, BiUpvote } from "react-icons/bi";
 import PostReview from "../PostReview/PostReview";
 import AllReviews from "../AllReviews/AllReviews";
+import toast from "react-hot-toast";
 
 const ProductDetails = () => {
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["productDetails", id],
     queryFn: async () => await axiosSecure.get(`/allProducts/${id}`),
   });
+
+  const handleReportedProduct = async (productId) => {
+    try {
+      await axiosSecure.put(`/reportdProduct/${productId}`, {
+        status: "Reported",
+      });
+      refetch();
+      console.log("Product Feedback change successfully");
+      toast.success("We'll consider your Feedback.. Thanks!");
+    } catch (error) {
+      console.error("Error Type updating product:", error);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -23,8 +37,16 @@ const ProductDetails = () => {
     );
   }
 
-  const { productName, productImage, description, tags, link, upVote, _id } =
-    data.data;
+  const {
+    productName,
+    productImage,
+    description,
+    tags,
+    link,
+    upVote,
+    _id,
+    ProductFeedback,
+  } = data.data;
   return (
     <>
       <div className="relative flex bg-clip-border rounded-xl bg-white text-gray-700 shadow-lg w-11/12 mx-auto md:flex-row flex-col">
@@ -69,8 +91,11 @@ const ProductDetails = () => {
           </div>
         </div>
         <div>
-          <button className="text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-xl px-6 italic py-1.5 m-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Report
+          <button
+            onClick={() => handleReportedProduct(_id)}
+            className="text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-xl px-6 italic py-1.5 m-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            {ProductFeedback === "Reported" ? "Reported" : "Report"}
           </button>
         </div>
       </div>

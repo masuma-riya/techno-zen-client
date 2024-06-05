@@ -27,6 +27,7 @@ const AddProduct = () => {
       upVote: 0,
       ProductStatus: data.productStatus,
       ProductType: data.productType,
+      ProductFeedback: data.productFeedback,
     });
 
     if (res.data.insertedId) {
@@ -192,6 +193,27 @@ const AddProduct = () => {
                   id="productType"
                   type="text"
                   {...register("productType", { value: "Normal" })}
+                  style={{
+                    color: "red",
+                    fontWeight: "500",
+                    fontSize: "1.1rem",
+                    fontStyle: "italic",
+                  }}
+                  readOnly
+                />
+              </div>
+              <div className="mb-6 hidden">
+                <label
+                  className="block text-gray-800 font-bold mb-2"
+                  htmlFor="productFeedback"
+                >
+                  Product Feedback
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="productFeedback"
+                  type="text"
+                  {...register("productFeedback", { value: "Good" })}
                   style={{
                     color: "red",
                     fontWeight: "500",
