@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
@@ -11,10 +11,14 @@ const PostReview = ({ productId }) => {
   const { displayName, photoURL } = user;
   const axiosSecure = useAxiosSecure();
   const [rating, setRating] = useState(0);
+  const queryClient = useQueryClient();
 
   const { mutateAsync: addReview } = useMutation({
     mutationFn: async (usersReview) =>
       await axiosSecure.post("/addReview", usersReview),
+    onSuccess: () => {
+      queryClient.invalidateQueries("allReviews");
+    },
   });
 
   const handleAddFood = async (event) => {

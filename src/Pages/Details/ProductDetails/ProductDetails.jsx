@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../Layout/Loader";
 import { BiDownvote, BiUpvote } from "react-icons/bi";
 import PostReview from "../PostReview/PostReview";
+import AllReviews from "../AllReviews/AllReviews";
 
 const ProductDetails = () => {
   const axiosSecure = useAxiosSecure();
@@ -74,6 +75,7 @@ const ProductDetails = () => {
         </div>
       </div>
       <PostReview productId={_id} />
+      <AllReviews productId={_id} />
     </>
   );
 };

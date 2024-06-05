@@ -1,7 +1,7 @@
 const ReportedCon = () => {
   return (
     <div>
-      <h1>Reported Contents</h1>
+      <h1>hi</h1>
     </div>
   );
 };
