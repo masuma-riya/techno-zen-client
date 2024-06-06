@@ -1,14 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Loader from "../../../Layout/Loader";
 
 const ReportedCon = () => {
   const axiosSecure = useAxiosSecure();
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["reportedProduct"],
     queryFn: async () => await axiosSecure.get("/reportedProduct"),
   });
 
   const allReportedContent = data?.data;
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-8">
+        <Loader></Loader>
+      </div>
+    );
+  }
   return (
     <>
       {/* component */}
@@ -29,21 +38,23 @@ const ReportedCon = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="hover:bg-grey-lighter">
-                <td className="py-4 px-6 text-2xl font-medium border-b border-grey-light">
-                  New York
-                </td>
-                <td className="py-4 px-7 border-b border-grey-light">
-                  <button className="text-white font-bold py-1 px-3 rounded text-base bg-green-600 dark:hover:bg-green-600">
-                    View Details
-                  </button>
-                </td>
-                <td className="py-4 px-6 border-b border-grey-light">
-                  <button className="text-white font-bold py-1 px-3 rounded text-base bg-red-500">
-                    Delete
-                  </button>
-                </td>
-              </tr>
+              {allReportedContent?.map((reported) => (
+                <tr key={reported._id} className="hover:bg-grey-lighter">
+                  <td className="py-4 px-6 text-2xl font-medium border-b border-grey-light">
+                    {reported.productName}
+                  </td>
+                  <td className="py-4 px-7 border-b border-grey-light">
+                    <button className="text-white font-bold py-1 px-3 rounded text-base bg-green-600 dark:hover:bg-green-600">
+                      View Details
+                    </button>
+                  </td>
+                  <td className="py-4 px-6 border-b border-grey-light">
+                    <button className="text-white font-bold py-1 px-3 rounded text-base bg-red-500">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

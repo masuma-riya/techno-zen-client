@@ -68,7 +68,7 @@ const Users = () => {
             </tr>
           </thead>
           <tbody className="bg-gray-200">
-            {users.map((user, index) => (
+            {users?.map((user, index) => (
               <tr
                 key={user._id}
                 className="bg-white border-b-2 border-gray-200"

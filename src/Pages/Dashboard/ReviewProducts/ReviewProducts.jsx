@@ -3,9 +3,10 @@ import useProducts from "../../../Hooks/useProducts";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { NavLink } from "react-router-dom";
+import Loader from "../../../Layout/Loader";
 
 const ReviewProducts = () => {
-  const [products, , refetch] = useProducts();
+  const [products, loading, refetch] = useProducts();
   const axiosSecure = useAxiosSecure();
 
   // getitem from localStorage
@@ -47,6 +48,14 @@ const ReviewProducts = () => {
       console.error("Error rejecting product:", error);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center mt-8">
+        <Loader></Loader>
+      </div>
+    );
+  }
 
   // Featured products
   const handleFeaturedProduct = async (productId) => {
@@ -125,7 +134,7 @@ const ReviewProducts = () => {
               </tr>
             </thead>
             <tbody>
-              {sortedProducts.map((product) => (
+              {sortedProducts?.map((product) => (
                 <tr key={product._id}>
                   <td className="p-4 border-b border-blue-gray-50">
                     <div className="flex items-center gap-3">

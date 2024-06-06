@@ -31,7 +31,7 @@ const AllReviews = ({ productId }) => {
           </p>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-            {productReviews.map((review) => (
+            {productReviews?.map((review) => (
               <div
                 key={review._id}
                 className="text-sm leading-6 flex flex-col h-full"

@@ -18,7 +18,7 @@ const AddProduct = () => {
       productName: data.productName,
       productImage: data.productImage,
       description: data.description,
-      tags: tags.map((tag) => tag.text),
+      tags: tags?.map((tag) => tag.text),
       link: data.link,
       username: user?.displayName,
       email: user?.email,

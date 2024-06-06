@@ -36,7 +36,7 @@ const Products = () => {
   };
   return (
     <div className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
-      {acceptedProducts.map((product) => (
+      {acceptedProducts?.map((product) => (
         <div
           key={product._id}
           className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl"
@@ -48,8 +48,8 @@ const Products = () => {
           />
           <div className="px-4 py-3 w-72">
             <div className="flex flex-wrap h-16 items-center">
-              {Array.isArray(product.tags) &&
-                product.tags.map((tag, index) => (
+              {Array.isArray(product?.tags) &&
+                product?.tags?.map((tag, index) => (
                   <span
                     key={index}
                     className="mr-2 mb-2 bg-green-100 text-green-600 py-1 px-2 rounded-full text-sm font-semibold"
@@ -89,7 +89,7 @@ const Products = () => {
               </button>
               <button className="py-1 px-4 hover:text-red-600 hover:scale-105 hover:shadow text-center border border-gray-300 rounded-md h-8 text-sm flex items-center gap-1 lg:gap-2">
                 <BiDownvote className="hover:text-red-600 text-xl"></BiDownvote>
-                <span className="text-lg">12</span>
+                <span className="text-lg">0</span>
               </button>
             </div>
           </div>
