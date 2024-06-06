@@ -19,6 +19,7 @@ import ModeratorRoute from "./ModeratorRoute/ModeratorRoute";
 import Products from "../Pages/Products/Products";
 import Details from "../Pages/Details/Details";
 import PrivateRoute2 from "./PrivateRoute2/PrivateRoute2";
+import Payment from "../Pages/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: "/products",
         element: <Products></Products>,
+      },
+      {
+        path: "/payment",
+        element: <Payment></Payment>,
       },
       {
         path: "/details/:id",

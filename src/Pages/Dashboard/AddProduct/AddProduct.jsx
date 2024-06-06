@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const AddProduct = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -283,6 +284,14 @@ const AddProduct = () => {
               >
                 Add Product
               </button>
+              <Link to="/payment">
+                <button
+                  className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                  Pay
+                </button>
+              </Link>
             </form>
           </div>
         </div>
