@@ -1,11 +1,9 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
-
 import useAuth from "../../../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const Checkout = () => {
   const [error, setError] = useState("");
@@ -13,7 +11,6 @@ const Checkout = () => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
-  const axiosPublic = useAxiosPublic();
 
   const [clientSecret, setClientSecret] = useState("");
   const { user } = useAuth();
@@ -88,7 +85,7 @@ const Checkout = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate("/dashboard/paymentHistory");
+          navigate("/dashboard/profile");
         }
       }
     }
