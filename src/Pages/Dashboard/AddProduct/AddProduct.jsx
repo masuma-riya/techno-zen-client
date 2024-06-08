@@ -279,19 +279,19 @@ const AddProduct = () => {
                 />
               </div>
               <button
-                className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 w-4/12 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
-                Add Product
+                Submit
               </button>
-              <Link to="/payment">
+              {/* <Link to="/payment">
                 <button
                   className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   type="submit"
                 >
                   Pay
                 </button>
-              </Link>
+              </Link> */}
             </form>
           </div>
         </div>

@@ -21,7 +21,7 @@ const MyProfile = () => {
         {!isMember && (
           <Link to="/payment">
             {" "}
-            <button className="inline-flex items-center justify-center rounded-xl bg-green-600 py-2 px-4 font-dm text-base font-medium text-white shadow-xl shadow-green-400/75 transition-transform duration-200 ease-in-out hover:scale-[1.02]">
+            <button className="inline-flex items-center justify-center rounded-xl bg-green-600 py-2 px-4 font-dm text-lg font-medium text-white shadow-xl shadow-green-400/75 transition-transform duration-200 ease-in-out hover:scale-[1.02]">
               Purchase Membership <span className="text-2xl ml-3">$ 100</span>
             </button>
           </Link>

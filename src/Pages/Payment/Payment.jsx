@@ -23,7 +23,7 @@ const Payment = () => {
         // Update user data in the auth context
         updateUserProfile(updatedUser);
         // Redirect to the payment history page or any other appropriate page
-        navigate("/dashboard/paymentHistory");
+        navigate("/dashboard/profile");
       } else {
         // Handle update failure
       }

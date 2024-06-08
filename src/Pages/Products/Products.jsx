@@ -2,7 +2,7 @@ import { BiDownvote } from "react-icons/bi";
 import { BiUpvote } from "react-icons/bi";
 import useAuth from "../../Hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useAccPro from "../../Hooks/useAccPro";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
@@ -58,9 +58,11 @@ const Products = () => {
                   </span>
                 ))}
             </div>
-            <p className="text-2xl mt-1 hover:underline font-bold text-black">
-              {product.productName}
-            </p>
+            <NavLink to={`/details/${product._id}`}>
+              <p className="text-2xl mt-1 hover:underline font-bold text-black">
+                {product.productName}
+              </p>
+            </NavLink>
             <p className="text-sm mt-4 h-32 font-semibold text-gray-500 italic">
               {product.description}
             </p>

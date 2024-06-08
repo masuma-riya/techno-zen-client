@@ -5,7 +5,7 @@ import Loader from "../../../Layout/Loader";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const FeaturedProduct = () => {
   const navigate = useNavigate();
@@ -66,9 +66,12 @@ const FeaturedProduct = () => {
                   alt=""
                 />
                 <div className="flex flex-col lg:mx-6">
-                  <a className="text-3xl mt-2 font-semibold text-gray-800 hover:underline dark:text-white">
-                    {featured.productName}
-                  </a>
+                  <NavLink to={`/details/${featured._id}`}>
+                    {" "}
+                    <h1 className="text-3xl mt-2 font-semibold text-gray-800 hover:underline dark:text-white">
+                      {featured.productName}
+                    </h1>
+                  </NavLink>
                   <a className="text-sm mt-4 font-semibold text-gray-500  dark:text-white">
                     {new Date(featured.timestamp).toLocaleString()}
                   </a>

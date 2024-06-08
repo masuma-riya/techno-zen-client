@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import DarkMode from "./DarkMode";
 import logo from "../../assets/logo/logo.png";
@@ -14,14 +14,11 @@ const Navbar = () => {
   const [isModerator] = useModerator();
   const { user, logOut } = useAuth();
 
-  const navigate = useNavigate();
-
   // handle logout
   const handleSignOut = () => {
     logOut()
       .then(() => {
         toast.success("User logged out Successfully");
-        navigate("/");
       })
       .catch((error) => console.log(error));
   };

@@ -6,7 +6,7 @@ import { BiDownvote, BiUpvote } from "react-icons/bi";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const TrendingProduct = () => {
   const axiosPublic = useAxiosPublic();
@@ -90,9 +90,11 @@ const TrendingProduct = () => {
               </button>
             </div>
             <div className="px-6 py-4">
-              <div className="font-bold text-2xl mb-1">
-                {trending.productName}
-              </div>
+              <NavLink to={`/details/${trending._id}`}>
+                <div className="font-bold hover:underline text-2xl mb-1">
+                  {trending.productName}
+                </div>
+              </NavLink>
             </div>
             <div className="px-6 pb-6 flex flex-wrap gap-3">
               {Array.isArray(trending?.tags) &&
@@ -107,6 +109,16 @@ const TrendingProduct = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="flex mt-10 justify-center items-center">
+        <NavLink to="/products">
+          {" "}
+          <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-2xl font-bold text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+            <span className="relative px-16 py-1.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+              Show All Products
+            </span>
+          </button>
+        </NavLink>
       </div>
     </div>
   );
