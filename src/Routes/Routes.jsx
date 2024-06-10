@@ -20,6 +20,7 @@ import Products from "../Pages/Products/Products";
 import Details from "../Pages/Details/Details";
 import PrivateRoute2 from "./PrivateRoute2/PrivateRoute2";
 import Payment from "../Pages/Payment/Payment";
+import UpdateProduct from "../Pages/Dashboard/MyProducts/UpdateProduct/UpdateProduct";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute2>
             <Details></Details>
+          </PrivateRoute2>
+        ),
+      },
+      {
+        path: "/updateProduct/:id",
+        element: (
+          <PrivateRoute2>
+            <UpdateProduct></UpdateProduct>
           </PrivateRoute2>
         ),
       },

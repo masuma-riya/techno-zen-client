@@ -5,13 +5,15 @@ import Loader from "../../../Layout/Loader";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const FeaturedProduct = () => {
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const location = useLocation();
+
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["featuredPro"],
     queryFn: async () => await axiosPublic.get("/featuredPro"),
@@ -26,7 +28,7 @@ const FeaturedProduct = () => {
 
   const handleVoteCount = async (product) => {
     if (!user) {
-      navigate("/login");
+      navigate("/login", { state: { from: location } });
       return;
     }
 

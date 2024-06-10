@@ -6,13 +6,15 @@ import { BiDownvote, BiUpvote } from "react-icons/bi";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const TrendingProduct = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const location = useLocation();
+
   const [filter, setFilter] = useState("desc");
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["trendingProducts"],
@@ -29,7 +31,7 @@ const TrendingProduct = () => {
 
   const handleVoteCount = async (product) => {
     if (!user) {
-      navigate("/login");
+      navigate("/login", { state: { from: location } });
       return;
     }
 

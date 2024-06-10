@@ -2,7 +2,7 @@ import { BiDownvote } from "react-icons/bi";
 import { BiUpvote } from "react-icons/bi";
 import useAuth from "../../Hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAccPro from "../../Hooks/useAccPro";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
@@ -12,6 +12,7 @@ const Products = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { mutateAsync: voteIncrement } = useMutation({
     mutationFn: async ({ id, userEmail }) =>
@@ -19,7 +20,7 @@ const Products = () => {
   });
   const handleVoteCount = async (product) => {
     if (!user) {
-      navigate("/login");
+      navigate("/login", { state: { from: location } });
       return;
     }
 

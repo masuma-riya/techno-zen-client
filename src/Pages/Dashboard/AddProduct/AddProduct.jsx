@@ -4,7 +4,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -12,6 +12,8 @@ const AddProduct = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [tags, setTags] = useState([]);
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     const timestamp = new Date().toISOString();
     console.log(data);
@@ -39,6 +41,7 @@ const AddProduct = () => {
         text: `Your product (${data.productName}) is added`,
         icon: "success",
       });
+      navigate("/dashboard/myProducts");
     }
     console.log(res.data);
   };
@@ -66,6 +69,7 @@ const AddProduct = () => {
   const onClearAll = () => {
     setTags([]);
   };
+
   return (
     <div className="container mx-auto p4-10">
       <div className="mx-auto bg-white rounded-lg overflow-hidden max-w-3xl">
@@ -282,7 +286,7 @@ const AddProduct = () => {
                 className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 w-4/12 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
-                Submit
+                Add Product
               </button>
               {/* <Link to="/payment">
                 <button
