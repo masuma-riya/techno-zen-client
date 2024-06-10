@@ -12,21 +12,18 @@ const Hero = () => {
           <div className="container mx-auto px-6 md:px-12 relative z-10 flex items-center py-24 xl:py-40">
             <div className="lg:w-3/5 xl:w-2/5 flex flex-col items-start relative z-10">
               <span className="font-mitr uppercase text-indigo-500">
-                Lorem ipsum
+                Techno Zone
               </span>
               <h1 className="font-roboto-slab text-4xl sm:text-6xl text-red-400 leading-tight mt-4">
-                Let&apos;s go <br /> back to school
+                Stack Up <br /> on Innovation
               </h1>
               <div className="max-w-md">
                 <p className="font-source-sans-pro text-indigo-500 mt-6 text-lg">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit
-                  tincidunt cras sociis, parturient enim montes.
+                  Discover and Share the Latest Innovations, Where Creators and
+                  Innovators Converge!
                 </p>
               </div>
-              <a
-                href="#"
-                className="block bg-indigo-500 hover:bg-indigo-400 py-2 px-4 rounded-full text-sm font-mitr text-white uppercase mt-10"
-              >
+              <a className="block bg-indigo-500 hover:bg-indigo-400 py-2 px-4 rounded-full text-sm font-mitr text-white uppercase mt-10">
                 Get started
               </a>
             </div>

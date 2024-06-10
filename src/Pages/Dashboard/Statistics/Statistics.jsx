@@ -1,18 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { Cell, Legend, Pie, PieChart, Tooltip } from "recharts";
+import Loader from "../../../Layout/Loader";
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
 const Statistics = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: stats = {} } = useQuery({
+  const { data: stats = {}, isLoading } = useQuery({
     queryKey: ["admin-stats"],
     queryFn: async () => {
       const res = await axiosSecure.get("/admin-stats");
       return res.data;
     },
   });
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-8">
+        <Loader />
+      </div>
+    );
+  }
 
   const data = [
     { name: "Products", value: stats?.products || 0 },
@@ -22,7 +31,7 @@ const Statistics = () => {
 
   return (
     <>
-      <div className="grid w-11/12 mx-auto gap-10  md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid w-11/12 mx-auto gap-10 mt-14 md:grid-cols-2 xl:grid-cols-4">
         <div className="w-11/12 mx-auto rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800">
           <div className="p-4 flex items-center">
             <div className="p-3 rounded-full text-orange-500 dark:text-orange-100 bg-orange-100 dark:bg-orange-500 mr-4">

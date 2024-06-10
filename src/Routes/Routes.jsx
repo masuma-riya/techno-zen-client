@@ -21,11 +21,13 @@ import Details from "../Pages/Details/Details";
 import PrivateRoute2 from "./PrivateRoute2/PrivateRoute2";
 import Payment from "../Pages/Payment/Payment";
 import UpdateProduct from "../Pages/Dashboard/MyProducts/UpdateProduct/UpdateProduct";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",

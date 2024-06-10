@@ -1,43 +1,44 @@
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
   return (
     <footer className="w-full mt-28 text-white py-8 bg-gradient-to-t from-green-600 to-indigo-600">
       <div className="container mx-auto flex flex-wrap justify-between">
         {/* Colonne 1 */}
         <div className="w-full sm:w-1/2 md:w-1/4 lg:w-1/6 px-4 mb-4">
-          <h2 className="text-xl font-bold mb-4">À propos</h2>
+          <h2 className="text-xl font-bold mb-4">Explore</h2>
           <ul>
             <li>
-              <a className="block hover:text-gray-300">Qui sommes-nous?</a>
+              <a className="block hover:text-gray-300">Home</a>
             </li>
             <li>
-              <a className="block hover:text-gray-300">Notre équipe</a>
+              <a className="block hover:text-gray-300">About us</a>
             </li>
             <li>
-              <a className="block hover:text-gray-300">Nos valeurs</a>
+              <a className="block hover:text-gray-300">Products</a>
             </li>
           </ul>
         </div>
         {/* Colonne 2 */}
         <div className="w-full sm:w-1/2 md:w-1/4 lg:w-1/6 px-4 mb-4">
-          <h2 className="text-xl font-bold mb-4">Services</h2>
+          <h2 className="text-xl font-bold mb-4">Top Categories</h2>
           <ul>
             <li>
-              <a className="block hover:text-gray-300">Service 1</a>
+              <a className="block hover:text-gray-300">Web Apps</a>
             </li>
             <li>
-              <a className="block hover:text-gray-300">Service 2</a>
+              <a className="block hover:text-gray-300">AI Tools</a>
             </li>
             <li>
-              <a className="block hover:text-gray-300">Service 3</a>
+              <a className="block hover:text-gray-300">Software</a>
             </li>
           </ul>
         </div>
         {/* Colonne 3 */}
         <div className="w-full sm:w-1/2 md:w-1/4 lg:w-1/6 px-4 mb-4">
-          <h2 className="text-xl font-bold mb-4">Contact</h2>
+          <h2 className="text-xl font-bold mb-4">Contact Us</h2>
           <ul>
             <li>
-              <a className="block hover:text-gray-300">Contactez-nous</a>
+              <a className="block hover:text-gray-300">Social Media</a>
             </li>
             <li>
               <a className="block hover:text-gray-300">Support</a>
@@ -49,7 +50,7 @@ const Footer = () => {
         </div>
         {/* Colonne 4 */}
         <div className="w-full sm:w-1/2 md:w-1/4 lg:w-1/6 px-4 mb-4">
-          <h2 className="text-xl font-bold mb-4">Réseaux sociaux</h2>
+          <h2 className="text-xl font-bold mb-4">Socials</h2>
           <ul>
             <li className="flex align-items">
               <svg
@@ -95,8 +96,8 @@ const Footer = () => {
       </div>
       <hr className="w-4/5 mt-2 mx-auto" />
       {/* Bas de page */}
-      <div className="text-center mt-8">
-        <p>© 2024 Pape Toulé Yade. Tous droits réservés.</p>
+      <div className="text-center text-xl mt-8">
+        <p>© Copyright {currentYear} Techno Zen. All rights reserved.</p>
       </div>
     </footer>
   );

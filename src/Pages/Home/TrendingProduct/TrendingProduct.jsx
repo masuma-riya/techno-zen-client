@@ -55,9 +55,9 @@ const TrendingProduct = () => {
     );
   }
   return (
-    <div className="w-11/12 mx-auto mt-16">
+    <div className="w-11/12 mx-auto mt-24">
       <h1 className="text-3xl mb-10 font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">
-        Trending Products
+        🎉 Trending Products
       </h1>
       <div className="grid gap-24 w-full h-full lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
         {allTrendingProduct?.slice(0, 6).map((trending) => (

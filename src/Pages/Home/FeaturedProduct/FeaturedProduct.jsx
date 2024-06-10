@@ -57,7 +57,7 @@ const FeaturedProduct = () => {
       <section className="bg-white mt-10 dark:bg-gray-900">
         <div className="container px-6 py-10 mx-auto">
           <h1 className="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">
-            Featured Products
+            🚀 Featured Products
           </h1>
           <div className="grid grid-cols-1 gap-8 mt-8 md:mt-10 md:grid-cols-2">
             {allFeaturedProduct?.slice(0, 4).map((featured) => (
