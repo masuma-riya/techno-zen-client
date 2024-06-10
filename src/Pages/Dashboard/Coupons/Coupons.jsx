@@ -1,7 +1,11 @@
+import AddCoupon from "../AddCoupon/AddCoupon";
+import ShowCoupon from "./ShowCoupon/ShowCoupon";
+
 const Coupons = () => {
   return (
     <div>
-      <h1>Coupons</h1>
+      <AddCoupon></AddCoupon>
+      <ShowCoupon></ShowCoupon>
     </div>
   );
 };

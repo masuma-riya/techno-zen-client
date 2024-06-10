@@ -95,7 +95,7 @@ const Navbar = () => {
               </NavLink>
 
               <NavLink
-                to="/"
+                to="/about-us"
                 className="text-black dark:text-white hover:text-blue-600 px-3 py-2 rounded-md text-xl italic font-semibold"
               >
                 About Us
@@ -197,7 +197,7 @@ const Navbar = () => {
           </NavLink>
 
           <NavLink
-            to="/"
+            to="/about-us"
             className="text-black dark:text-white text-lg md:text-xl italic font-semibold hover:text-blue-600 block px-3 py-2 rounded-md"
           >
             About Us

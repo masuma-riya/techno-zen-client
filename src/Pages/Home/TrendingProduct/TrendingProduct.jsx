@@ -55,7 +55,7 @@ const TrendingProduct = () => {
     );
   }
   return (
-    <div className="w-11/12 mx-auto mt-24">
+    <div className="w-11/12 mx-auto mt-36 mb-24">
       <h1 className="text-3xl mb-10 font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">
         🎉 Trending Products
       </h1>

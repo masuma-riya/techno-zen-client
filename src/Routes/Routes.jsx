@@ -22,6 +22,7 @@ import PrivateRoute2 from "./PrivateRoute2/PrivateRoute2";
 import Payment from "../Pages/Payment/Payment";
 import UpdateProduct from "../Pages/Dashboard/MyProducts/UpdateProduct/UpdateProduct";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import About from "../Pages/About/About";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
             <UpdateProduct></UpdateProduct>
           </PrivateRoute2>
         ),
+      },
+      {
+        path: "/about-us",
+        element: <About></About>,
       },
       {
         path: "/update-user",
