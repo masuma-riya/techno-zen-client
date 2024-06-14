@@ -4,11 +4,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
 import SocialLogin from "../../SocialLogin/SocialLogin";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 
 const Login = () => {
   const { signInUser } = useAuth();
 
   const [loginError, setLoginError] = useState("");
+  const [loginPasswordShow, setLoginPasswordShow] = useState(false);
 
   // Location
   const location = useLocation();
@@ -71,7 +73,7 @@ const Login = () => {
                   required
                 />
               </div>
-              <div>
+              <div className="relative">
                 <label
                   htmlFor="password"
                   className="mb-2 dark:text-gray-400 text-xl italic font-medium"
@@ -82,10 +84,20 @@ const Login = () => {
                   id="password"
                   name="password"
                   className="border mt-3 mb-2 p-3 shadow-md dark:bg-indigo-700 dark:text-gray-300  dark:border-gray-700 placeholder:text-base focus:scale-105 outline-none ease-in-out duration-300 border-gray-300 rounded-lg w-full"
-                  type="password"
+                  type={loginPasswordShow ? "text" : "password"}
                   placeholder="Password"
                   required
                 />
+                <span
+                  className="absolute top-[52px] right-8"
+                  onClick={() => setLoginPasswordShow(!loginPasswordShow)}
+                >
+                  {loginPasswordShow ? (
+                    <IoEye className="md:text-2xl text-[22px]"></IoEye>
+                  ) : (
+                    <IoEyeOff className="md:text-2xl text-[22px]"></IoEyeOff>
+                  )}
+                </span>
               </div>
               <a className="group text-blue-500 transition-all duration-100 ease-in-out">
                 <span className="bg-left-bottom bg-gradient-to-r text-base from-blue-400 to-blue-400 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">

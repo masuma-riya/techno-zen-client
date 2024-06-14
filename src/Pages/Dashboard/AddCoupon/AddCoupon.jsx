@@ -1,12 +1,16 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const AddCoupon = () => {
   const axiosSecure = useAxiosSecure();
-  const { mutateAsync: addCoupon, refetch } = useMutation({
+  const queryClient = useQueryClient();
+  const { mutateAsync: addCoupon } = useMutation({
     mutationFn: async (newCoupon) =>
       await axiosSecure.post("/coupons", newCoupon),
+    onSuccess: () => {
+      queryClient.refetchQueries("coupons");
+    },
   });
 
   const handleAddCoupon = async (event) => {
@@ -29,7 +33,6 @@ const AddCoupon = () => {
     try {
       await addCoupon(newCoupon);
       form.reset();
-      refetch();
       Swal.fire({
         title: "Success",
         text: "Coupon added successfully",
@@ -47,12 +50,12 @@ const AddCoupon = () => {
   };
 
   return (
-    <div className=" bg-gray-50 flex flex-col justify-center sm:px-6 lg:px-8">
-      <h2 className="mt-2 text-center text-3xl leading-9 font-extrabold text-gray-900">
+    <div className="flex flex-col justify-center sm:px-6 lg:px-8">
+      <h2 className="mt-2 italic text-center text-3xl leading-9 font-semibold text-gray-900">
         Add a Coupon
       </h2>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="mt-3 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form onSubmit={handleAddCoupon}>
             <div>
@@ -68,7 +71,6 @@ const AddCoupon = () => {
                   name="couponCode"
                   placeholder="Enter a Coupon Code"
                   type="text"
-                  required
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                 />
               </div>

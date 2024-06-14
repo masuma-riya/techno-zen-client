@@ -15,7 +15,7 @@ const ReportedCon = () => {
   const allReportedContent = data?.data;
 
   const queryClient = useQueryClient();
-  const { mutateAsync: deleteFood } = useMutation({
+  const { mutateAsync: deleteProduct } = useMutation({
     mutationFn: async (id) => await axiosSecure.delete(`/products/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries(["reportedPro"]);
@@ -25,7 +25,7 @@ const ReportedCon = () => {
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You want to Delete this Food!",
+      text: "You want to Delete this Product!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -34,10 +34,10 @@ const ReportedCon = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await deleteFood(id);
+          await deleteProduct(id);
           Swal.fire({
             title: "Deleted!",
-            text: "Your Food has been deleted.",
+            text: "Reported Product has been deleted.",
             icon: "success",
           });
         } catch (error) {

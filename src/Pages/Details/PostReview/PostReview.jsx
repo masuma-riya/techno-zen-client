@@ -21,7 +21,7 @@ const PostReview = ({ productId }) => {
     },
   });
 
-  const handleAddFood = async (event) => {
+  const handleAddProduct = async (event) => {
     event.preventDefault();
 
     const form = event.target;
@@ -47,7 +47,7 @@ const PostReview = ({ productId }) => {
 
   return (
     <form
-      onSubmit={handleAddFood}
+      onSubmit={handleAddProduct}
       className="w-7/12 mx-auto mt-20 p-6 bg-white border rounded-lg shadow-lg"
     >
       <h2 className="text-2xl font-bold mb-6">Feedback Form</h2>

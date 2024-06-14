@@ -5,7 +5,9 @@ const Coupons = () => {
   return (
     <div>
       <AddCoupon></AddCoupon>
-      <ShowCoupon></ShowCoupon>
+      <div className="mt-8">
+        <ShowCoupon></ShowCoupon>
+      </div>
     </div>
   );
 };

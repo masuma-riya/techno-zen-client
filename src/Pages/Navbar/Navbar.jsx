@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { Link, NavLink } from "react-router-dom";
-import { toast } from "react-toastify";
 import DarkMode from "./DarkMode";
 import logo from "../../assets/logo/logo.png";
 import useAdmin from "../../Hooks/useAdmin";
@@ -18,7 +17,7 @@ const Navbar = () => {
   const handleSignOut = () => {
     logOut()
       .then(() => {
-        toast.success("User logged out Successfully");
+        // toast.success("User logged out Successfully");
       })
       .catch((error) => console.log(error));
   };

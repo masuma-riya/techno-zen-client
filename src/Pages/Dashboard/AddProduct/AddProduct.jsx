@@ -7,7 +7,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    validateCriteriaMode: "all",
+  });
 
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -85,7 +92,7 @@ const AddProduct = () => {
                   className="block text-gray-800 font-bold mb-2"
                   htmlFor="productName"
                 >
-                  Product Name
+                  Product Name <span className="text-xl">*</span>
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -94,13 +101,18 @@ const AddProduct = () => {
                   type="text"
                   placeholder="Product Name"
                 />
+                {errors.productName && (
+                  <p className="text-red-600 text-lg font-normal mt-2 italic">
+                    Product Name is required
+                  </p>
+                )}
               </div>
               <div className="mb-6">
                 <label
                   className="block text-gray-800 font-bold mb-2"
                   htmlFor="productImage"
                 >
-                  Product Image
+                  Product Image <span className="text-xl">*</span>
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -109,13 +121,18 @@ const AddProduct = () => {
                   placeholder="Product Image"
                   {...register("productImage", { required: true })}
                 />
+                {errors.productImage && (
+                  <p className="text-red-600 text-lg font-normal mt-2 italic">
+                    Product Image is required
+                  </p>
+                )}
               </div>
               <div className="mb-6">
                 <label
                   className="block text-gray-800 font-bold mb-2"
                   htmlFor="description"
                 >
-                  Description
+                  Description <span className="text-xl">*</span>
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -124,6 +141,11 @@ const AddProduct = () => {
                   placeholder="Product Description"
                   {...register("description", { required: true })}
                 />
+                {errors.description && (
+                  <p className="text-red-600 text-lg font-normal mt-2 italic">
+                    Product Description is required
+                  </p>
+                )}
               </div>
               <div className="mb-6">
                 <label
@@ -155,7 +177,7 @@ const AddProduct = () => {
                   className="block text-gray-800 font-bold mb-2"
                   htmlFor="link"
                 >
-                  External Link Of Product
+                  External Link Of Product <span className="text-xl">*</span>
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -164,6 +186,11 @@ const AddProduct = () => {
                   placeholder="Product Link"
                   {...register("link", { required: true })}
                 />
+                {errors.link && (
+                  <p className="text-red-600 text-lg font-normal mt-2 italic">
+                    External Link is required
+                  </p>
+                )}
               </div>
               <div className="mb-6 hidden">
                 <label
@@ -240,7 +267,6 @@ const AddProduct = () => {
                   id="username"
                   type="text"
                   placeholder="Owner Name"
-                  // {...register("username", { required: true })}
                   name="username"
                   defaultValue={user?.displayName}
                   readOnly
@@ -258,7 +284,6 @@ const AddProduct = () => {
                   id="email"
                   type="email"
                   placeholder="Owner Email"
-                  // {...register("email", { required: true })}
                   name="email"
                   defaultValue={user?.email}
                   readOnly
@@ -276,7 +301,6 @@ const AddProduct = () => {
                   id="photoURL"
                   type="text"
                   placeholder="Owner Photo URL"
-                  // {...register("photoURL", { required: true })}
                   name="photoURL"
                   defaultValue={user?.photoURL}
                   readOnly

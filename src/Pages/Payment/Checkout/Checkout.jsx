@@ -70,7 +70,7 @@ const Checkout = () => {
         // now save the payment in the database
         const payment = {
           email: user.email,
-          price: 100,
+          price: 1000,
           transactionId: paymentIntent.id,
           date: new Date(), // utc date convert. use moment js to
           status: "PAID",
@@ -109,7 +109,7 @@ const Checkout = () => {
         }}
       />
       <button
-        className="btn btn-sm btn-primary my-4"
+        className="px-8 py-1 bg-blue-600 hover:bg-blue-700 rounded-lg text-xl text-white font-semibold  my-8"
         type="submit"
         disabled={!stripe || !clientSecret}
       >

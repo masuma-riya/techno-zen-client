@@ -2,11 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import { FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Loader from "../../../Layout/Loader";
 
 const Users = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: users = [], refetch } = useQuery({
+  const {
+    data: users = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
@@ -46,6 +51,14 @@ const Users = () => {
     });
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-8">
+        <Loader></Loader>
+      </div>
+    );
+  }
+
   return (
     <>
       {/* component */}
@@ -74,12 +87,10 @@ const Users = () => {
                 className="bg-white border-b-2 border-gray-200"
               >
                 <th>{index + 1}</th>
-                <td>
-                  <span className="text-center ml-4 font-semibold">
-                    {user.name}
-                  </span>
+                <td className="text-center">
+                  <span className="ml-4 font-semibold">{user.name}</span>
                 </td>
-                <td className="px-24 py-2">
+                <td className="px-24 text-center  py-2">
                   <span>{user.email}</span>
                 </td>
 
@@ -93,11 +104,11 @@ const Users = () => {
                     </button>
                     <ul
                       tabIndex={0}
-                      className="dropdown-content menu -mt-9 ml-14 shadow bg-base-100 rounded-box w-48"
+                      className="dropdown-content menu -mt-9 ml-12 shadow bg-base-100 rounded-box w-48"
                     >
                       <li>
                         {user.role === "admin" ? (
-                          "Admin"
+                          <h2 className="font-semibold text-base">Admin</h2>
                         ) : (
                           <button
                             onClick={() => handleMakeAdmin(user)}
@@ -109,7 +120,7 @@ const Users = () => {
                       </li>
                       <li>
                         {user.role === "moderator" ? (
-                          "Moderator"
+                          <h2 className="font-semibold text-base">Moderator</h2>
                         ) : (
                           <button
                             onClick={() => handleMakeModerator(user)}

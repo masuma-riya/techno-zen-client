@@ -5,12 +5,15 @@ import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { toast } from "react-toastify";
 import SocialLogin from "../../SocialLogin/SocialLogin";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 
 const SignUp = () => {
   const axiosPublic = useAxiosPublic();
   const { createUser, updateUserProfile } = useAuth();
 
   const [registerError, setRegisterError] = useState("");
+  const [passwordShow, setPasswordShow] = useState(false);
+  const [conPasswordShow, setConPasswordShow] = useState(false);
 
   const navigate = useNavigate();
 
@@ -176,7 +179,7 @@ rounded-md w-full py-3 focus:outline-none text-lg placeholder-neutral-500 font-s
                 className="appearance-none border text-lg pl-12 border-gray-100 shadow-sm 
 focus:shadow-md placeholder-gray-500 font-semibold rounded-md 
 w-full py-3 focus:outline-none"
-                type="password"
+                type={passwordShow ? "text" : "password"}
                 placeholder="Password"
                 {...register("password", {
                   required: true,
@@ -186,6 +189,16 @@ w-full py-3 focus:outline-none"
                 })}
                 name="password"
               />{" "}
+              <span
+                className="absolute top-[14px] md:right-10 right-4"
+                onClick={() => setPasswordShow(!passwordShow)}
+              >
+                {passwordShow ? (
+                  <IoEye className="md:text-2xl text-[22px]"></IoEye>
+                ) : (
+                  <IoEyeOff className="md:text-2xl text-[22px]"></IoEyeOff>
+                )}
+              </span>
               <div className="absolute left-0 inset-y-0 flex items-center">
                 {" "}
                 <svg
@@ -225,7 +238,7 @@ w-full py-3 focus:outline-none"
                 className="appearance-none border text-lg pl-12 border-gray-100 shadow-sm 
 focus:shadow-md placeholder-gray-500 font-semibold rounded-md 
 w-full py-3 focus:outline-none"
-                type="password"
+                type={conPasswordShow ? "text" : "password"}
                 placeholder="Confirm Password"
                 {...register("confirmPassword", {
                   validate: (value) => value === watch("password"),
@@ -233,6 +246,16 @@ w-full py-3 focus:outline-none"
                 name="confirmPassword"
                 required
               />{" "}
+              <span
+                className="absolute top-[14px] md:right-10 right-4"
+                onClick={() => setConPasswordShow(!conPasswordShow)}
+              >
+                {conPasswordShow ? (
+                  <IoEye className="md:text-2xl text-[22px]"></IoEye>
+                ) : (
+                  <IoEyeOff className="md:text-2xl text-[22px]"></IoEyeOff>
+                )}
+              </span>
               <div className="absolute left-0 inset-y-0 flex items-center">
                 {" "}
                 <svg

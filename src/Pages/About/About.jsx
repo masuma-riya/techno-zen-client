@@ -4,6 +4,9 @@ const About = () => {
       <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
         Why to choose US?
       </h2>
+      <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+        Why to choose US?
+      </h2>
       <div className="flex flex-wrap items-center mt-20 text-left text-center">
         <div className="w-full md:w-3/5 lg:w-1/2 px-4">
           <img

@@ -9,16 +9,15 @@ const ReviewProducts = () => {
   const [products, loading, refetch] = useProducts();
   const axiosSecure = useAxiosSecure();
 
-  // getitem from localStorage
+  // getitem from sessionStorage
   const initialDisabledButtons =
-    JSON.parse(localStorage.getItem("disabledButtons")) || {};
+    JSON.parse(sessionStorage.getItem("disabledButtons")) || {};
   const [disabledButtons, setDisabledButtons] = useState(
     initialDisabledButtons
   );
 
   useEffect(() => {
-    // setitem to localstorage
-    localStorage.setItem("disabledButtons", JSON.stringify(disabledButtons));
+    sessionStorage.setItem("disabledButtons", JSON.stringify(disabledButtons));
   }, [disabledButtons]);
 
   // Accepted product
@@ -153,7 +152,13 @@ const ReviewProducts = () => {
                   <td className="p-4 border-b border-blue-gray-50">
                     <div className="w-max">
                       <div
-                        className="relative mx-3 grid items-center font-sans font-bold whitespace-nowrap select-none bg-green-500/20 text-green-900 py-1 px-2 text-xs rounded-md"
+                        className={`relative mx-3 grid items-center font-semibold whitespace-nowrap select-none py-1 px-2 text-sm rounded-md ${
+                          product.ProductStatus === "Accepted"
+                            ? "bg-green-200 text-slate-700"
+                            : product.ProductStatus === "Pending"
+                            ? "bg-slate-200 text-slate-700"
+                            : "bg-red-300 text-slate-700"
+                        }`}
                         style={{ opacity: 1 }}
                       >
                         <span>{product.ProductStatus}</span>

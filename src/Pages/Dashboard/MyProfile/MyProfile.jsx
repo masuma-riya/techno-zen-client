@@ -4,7 +4,6 @@ import useMember from "../../../Hooks/useMember";
 const MyProfile = () => {
   const { user } = useAuth();
   const [isMember] = useMember();
-  console.log(isMember);
 
   return (
     <div className="w-5/12 mx-auto mt-16 overflow-hidden bg-white rounded-lg shadow-lg hover:shadow-blue-400">
@@ -22,7 +21,7 @@ const MyProfile = () => {
           <Link to="/payment">
             {" "}
             <button className="inline-flex items-center justify-center rounded-xl bg-green-600 py-2 px-4 font-dm text-lg font-medium text-white shadow-xl shadow-green-400/75 transition-transform duration-200 ease-in-out hover:scale-[1.02]">
-              Purchase Membership <span className="text-2xl ml-3">$ 100</span>
+              Purchase Membership <span className="text-2xl ml-3">$ 1000</span>
             </button>
           </Link>
         )}

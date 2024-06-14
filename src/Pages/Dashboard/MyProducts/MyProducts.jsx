@@ -37,7 +37,7 @@ const MyProducts = () => {
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You want to Delete this Food!",
+      text: "You want to Delete this Product!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -103,6 +103,8 @@ const MyProducts = () => {
                   className={`px-3 text-center py-1 text-base font-semibold inline-flex leading-5 rounded-3xl ${
                     product.ProductStatus === "Accepted"
                       ? "bg-green-300 text-slate-700"
+                      : product.ProductStatus === "Pending"
+                      ? "bg-slate-200 text-slate-700"
                       : "bg-red-300 text-slate-700"
                   }`}
                 >

@@ -23,6 +23,7 @@ import Payment from "../Pages/Payment/Payment";
 import UpdateProduct from "../Pages/Dashboard/MyProducts/UpdateProduct/UpdateProduct";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import About from "../Pages/About/About";
+import EditCoupon from "../Pages/Dashboard/Coupons/EditCoupon/EditCoupon";
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
             <UpdateProduct></UpdateProduct>
           </PrivateRoute2>
         ),
+      },
+      {
+        path: "/editCoupon/:id",
+        element: <EditCoupon></EditCoupon>,
       },
       {
         path: "/about-us",

@@ -35,8 +35,8 @@ const Payment = () => {
     <div className="max-w-5xl mx-auto flex justify-center py-5">
       <div>
         <div>
-          <button className="text-3xl font-bold">
-            Subscription Amount: $ 100
+          <button className="text-3xl mt-4 mb-4 font-bold">
+            Subscription Amount: $ 1000
           </button>
         </div>
         <div className="mt-6">
