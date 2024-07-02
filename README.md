@@ -1,15 +1,10 @@
 # Techno Zen
 
 ## Project Overview
-Techno Zen is an online platform where tech enthusiasts can showcase and browse various tech products such as Web applications, like Web Application, AI tools, Games application etc. It features role-based authentication for User, Admin, and Moderator roles, allowing different levels of access and control. Users can also purchase memberships via Stripe for additional features and benefits.
+Techno Zen is an online platform where tech enthusiasts can showcase and browse various tech products such as Web applications, like Web Application, AI tools, Games application etc. It features role-based authentication for User, Admin, and Moderator roles, allowing different levels of access and control. Users can also purchase memberships via Stripe for additional features and benefits. Provides a centralized platform for tech enthusiasts to discover and showcase innovative products. Facilitates secure membership management and payment processing via Stripe. Employs voting mechanisms to highlight trending and popular products.
 
 ## Live Site
 Check out the Live Site:- [Techno-Zen](https://techno-zen.web.app/).
-
-### Problem Solving
-- Provides a centralized platform for tech enthusiasts to discover and showcase innovative products.
-- Facilitates secure membership management and payment processing via Stripe.
-- Employs voting mechanisms to highlight trending and popular products.
 
 ### Key Features
 - **Role-Based Authentication**: Users are categorized as User, Admin, or Moderator with specific permissions.
