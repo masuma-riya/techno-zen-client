@@ -15,7 +15,7 @@ Check out here :- [Techno-Zen-Server](https://techno-zen-server.vercel.app).
 - **Voting System**: Allows users to vote (up or down) on products, showcasing trending and popular items.
 
 ## Technologies used
-- **Frontend**: ReactJS, Firebase for hostiung and authentication, JavaScript, HTML5, CSS3.
+- **Frontend**: ReactJS, Firebase for hostiung and authentication, Tanstack React-Query, Axios, Html, Tailwind CSS, React Helmet Async, React-hot-toast.
 - **Backend**: Node.js, Express.js, MongoDB for database, JWT for authentication, Stripe Payment Intregration.
 
 ## Local Setup
