@@ -4,7 +4,7 @@
 Techno Zen is an online platform where tech enthusiasts can showcase and browse various tech products such as Web applications, like Web Application, AI tools, Games application etc. It features role-based authentication for User, Admin, and Moderator roles, allowing different levels of access and control. Users can also purchase memberships via Stripe for additional features and benefits.
 
 ## Live Site
-Check out Techno Zen live at [techno-zen.web.app](https://techno-zen.web.app/).
+Check out the Live Site:- [Techno-Zen](https://techno-zen.web.app/).
 
 ### Problem Solving
 - Provides a centralized platform for tech enthusiasts to discover and showcase innovative products.
