@@ -5,7 +5,7 @@ Techno Zen is an online platform where tech enthusiasts can showcase and browse 
 
 **Live Site URL** : [Techno-Zen](https://techno-zen.web.app/)
 
-**Server Side API** : [Techno-Zen-Server](https://techno-zen-server.vercel.app).
+**Server Side API** : [Techno-Zen-Server](https://techno-zen-server.vercel.app)
 
 ### Key Features
 - **Role-Based Authentication**: Users are categorized as User, Admin, or Moderator with specific permissions.
