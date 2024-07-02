@@ -21,7 +21,7 @@ Check out here :- [Techno-Zen-Server](https://techno-zen-server.vercel.app).
 ## Local Setup
 To run the project locally, follow these steps:
 1. Clone the repository: `git clone https://github.com/masuma-riya/techno-zen-client.git`
-2. Navigate to the project directory: `cd techno-zen`
+2. Navigate to the project directory.
 3. Install dependencies by npm i.
 4. Set up Firebase configuration:
 - Create a Firebase project and obtain credentials.
