@@ -9,7 +9,7 @@ const useAccPro = () => {
     isPending: loading,
     refetch,
   } = useQuery({
-    queryKey: [" acceptedProducts"],
+    queryKey: ["acceptedProducts"],
     queryFn: async () => {
       const res = await axiosPublic.get("/accPro");
       return res.data;

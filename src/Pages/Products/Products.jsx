@@ -1,16 +1,34 @@
 import { BiDownvote } from "react-icons/bi";
 import { BiUpvote } from "react-icons/bi";
 import useAuth from "../../Hooks/useAuth";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAccPro from "../../Hooks/useAccPro";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Loader from "../../Layout/Loader";
 
 const Products = () => {
   const [acceptedProducts, , refetch] = useAccPro();
   const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const axiosPublic = useAxiosPublic();
+  const InputRef = useRef();
+  const queryClient = useQueryClient();
+
+  const handleUseRef = () => {
+    setSearch(InputRef.current.value);
+  };
+
+  const { data = [], isLoading } = useQuery({
+    queryKey: [search, "proSearch"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/accPro?tag=${search}`);
+      return res.data;
+    },
+  });
 
   const productsPerPage = 6;
 
@@ -22,14 +40,12 @@ const Products = () => {
   const { mutateAsync: voteIncrement } = useMutation({
     mutationFn: async ({ id, userEmail }) =>
       await axiosSecure.put(`/voteCount/${id}`, { userEmail }),
+    onSuccess: () => queryClient.invalidateQueries(["proSearch"]),
   });
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = acceptedProducts?.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
+  const currentProducts = data?.slice(indexOfFirstProduct, indexOfLastProduct);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -51,6 +67,14 @@ const Products = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-8">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <div>
       {/* Search */}
@@ -60,11 +84,16 @@ const Products = () => {
         htmlFor="search-bar"
       >
         <input
-          id="search-bar"
-          placeholder="your keyword here"
+          id=""
+          name="searchBar"
+          placeholder="Your Keyword here"
           className="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white"
+          ref={InputRef}
         />
-        <button className="w-full md:w-auto px-6 py-3 bg-black border-black text-white fill-white active:scale-95 duration-100 border will-change-transform overflow-hidden relative rounded-xl transition-all disabled:opacity-70">
+        <button
+          onClick={() => handleUseRef()}
+          className="w-full md:w-auto px-6 py-3 bg-black border-black text-white fill-white active:scale-95 duration-100 border will-change-transform overflow-hidden relative rounded-xl transition-all disabled:opacity-70"
+        >
           <div className="relative">
             <div className="flex items-center justify-center h-3 w-3 absolute inset-1/2 -translate-x-1/2 -translate-y-1/2 transition-all">
               <svg
@@ -96,6 +125,7 @@ const Products = () => {
           </div>
         </button>
       </label>
+
       <div className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
         {currentProducts?.map((product) => (
           <div
@@ -159,6 +189,7 @@ const Products = () => {
           </div>
         ))}
       </div>
+
       {/* Pagination */}
       <div className="flex justify-center mt-14">
         {Array.from({
