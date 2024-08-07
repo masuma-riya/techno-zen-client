@@ -1,8 +1,33 @@
-# React + Vite
+# Techno Zen
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
+Techno Zen is an online platform where tech enthusiasts can showcase and browse various tech products such as Web applications, like Web Application, AI tools, Games application etc. It features role-based authentication for User, Admin, and Moderator roles, allowing different levels of access and control. Users can also purchase memberships via Stripe for additional features and benefits. Provides a centralized platform for tech enthusiasts to discover and showcase innovative products. Facilitates secure membership management and payment processing via Stripe. Employs voting mechanisms to highlight trending and popular products.
 
-Currently, two official plugins are available:
+**Live Site URL** : [Techno-Zen](https://techno-zen.web.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Server Side API** : [Techno-Zen-Server](https://techno-zen-server.vercel.app)
+
+### Key Features
+- **Role-Based Authentication**: Users are categorized as User, Admin, or Moderator with specific permissions.
+- **Membership Purchase**: Users can buy memberships via Stripe, unlocking premium features.
+- **Voting System**: Allows users to vote (up or down) on products, showcasing trending and popular items.
+
+## Technologies used
+- **Frontend**: ReactJS, Firebase for hostiung and authentication, Tanstack React-Query, Axios, Html, Tailwind CSS, React Helmet Async, React-hot-toast.
+- **Backend**: Node.js, Express.js, MongoDB for database, JWT for authentication, Stripe Payment Intregration.
+
+## Local Setup
+To run the project locally, follow these steps:
+1. Clone the repository: `git clone https://github.com/masuma-riya/techno-zen-client.git`
+2. Navigate to the project directory.
+3. Install dependencies by npm i.
+   
+4. Set up Firebase configuration :
+- Create a Firebase project and obtain credentials.
+  
+5. Configure Stripe Payments:
+- Obtain Stripe API keys and configure them in the backend.
+  
+6. Start the frontend and backend servers.
+7. Access the application at client side `http://localhost:3000` in your web browser.
+8. Access the application at server side `http://localhost:5000` in your web browser.
